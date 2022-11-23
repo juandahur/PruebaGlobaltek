@@ -28,4 +28,9 @@ public class DetallesServices {
         detallesRepository.delete(detalles);
     }
 
+    public List<Detalles> findDetallesByFacturasId(Long id) {
+        return detallesRepository.findByFacturasId(id);
+    }
+
+
 }

@@ -9,7 +9,6 @@ import javax.persistence.*;
 
 public class Detalles {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "Cantidad")
@@ -33,8 +32,8 @@ public class Detalles {
 
     }
 
-    public Detalles( float cantidad, float precioUnitario, Facturas facturas, Productos productos) {
-
+    public Detalles(Long id, float cantidad, float precioUnitario, Facturas facturas, Productos productos) {
+        this.id = id;
         this.cantidad = cantidad;
         this.precioUnitario = precioUnitario;
         this.facturas = facturas;

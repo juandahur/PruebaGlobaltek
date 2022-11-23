@@ -11,18 +11,18 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-
+@RequestMapping("/facturas")
 public class FacturasController {
 
     @Autowired
     private FacturasServices facturasServices;
 
-    @GetMapping("/Facturas")
+    @GetMapping()
     private ResponseEntity<List<Facturas>> listAllFacturas() {
         return ResponseEntity.ok(facturasServices.getAllFacturas());
     }
 
-    @PostMapping("/FacturasCreate")
+    @PostMapping("/create")
     private ResponseEntity<Facturas> save(@RequestBody Facturas facturas) {
         Facturas temporal = facturasServices.create(facturas);
 
@@ -34,16 +34,16 @@ public class FacturasController {
         }
     }
 
-    @DeleteMapping("/Facturas")
-    private ResponseEntity<Void> deleteFactura(@RequestBody Long id) {
+    @DeleteMapping(value = "{id}")
+    private ResponseEntity<Void> deleteFactura(@RequestParam("id") Long id) {
 
         facturasServices.deleteById(id);
         return ResponseEntity.ok().build();
 
     }
 
-    @PatchMapping("/EditarFacturas")
-    private ResponseEntity<Facturas> patchFactura(@RequestBody Facturas facturasParam, @RequestBody Long id) {
+    @PatchMapping("/editar/{id}")
+    private ResponseEntity<Facturas> patchFactura(@RequestBody Facturas facturasParam, @RequestParam("id") Long id) {
         try {
             Facturas facturas = facturasServices.findById(id).get();
             return new ResponseEntity<Facturas>(facturasServices.create(facturasParam), HttpStatus.OK);

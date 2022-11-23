@@ -11,7 +11,6 @@ import java.util.List;
 
 public class Facturas {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "NumeroFactura")
@@ -49,7 +48,8 @@ public class Facturas {
 
     }
 
-    public Facturas(String numeroFactura, Date fecha, String documentoCliente, float subtotal, float descuento, float iva, float totalDescuento, float totalImpuesto, float total, List<Detalles> detallesList) {
+    public Facturas(Long id, String numeroFactura, Date fecha, String documentoCliente, float subtotal, float descuento, float iva, float totalDescuento, float totalImpuesto, float total, List<Detalles> detallesList) {
+        this.id = id;
         this.numeroFactura = numeroFactura;
         this.fecha = fecha;
         this.documentoCliente = documentoCliente;

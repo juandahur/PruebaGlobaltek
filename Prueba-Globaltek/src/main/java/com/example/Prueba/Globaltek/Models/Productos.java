@@ -9,7 +9,6 @@ import java.util.List;
 @Table(name = "productos")
 public class Productos {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "Producto")
