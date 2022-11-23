@@ -1,5 +1,6 @@
-package com.example.Prueba.Globaltek.Models;
+package com.example.Prueba.Globaltek.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import javax.persistence.*;
 
 public class Detalles {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "Cantidad")
@@ -16,12 +18,12 @@ public class Detalles {
 
     @Column(name = "PrecioUnitario")
     private float precioUnitario;
-
-
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "facturas_id")
     private Facturas facturas;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "productos_id")
     private Productos productos;
@@ -32,8 +34,8 @@ public class Detalles {
 
     }
 
-    public Detalles(Long id, float cantidad, float precioUnitario, Facturas facturas, Productos productos) {
-        this.id = id;
+    public Detalles(float cantidad, float precioUnitario, Facturas facturas, Productos productos) {
+
         this.cantidad = cantidad;
         this.precioUnitario = precioUnitario;
         this.facturas = facturas;

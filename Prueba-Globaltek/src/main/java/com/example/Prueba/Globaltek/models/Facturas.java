@@ -1,6 +1,7 @@
-package com.example.Prueba.Globaltek.Models;
+package com.example.Prueba.Globaltek.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -11,6 +12,7 @@ import java.util.List;
 
 public class Facturas {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "NumeroFactura")
@@ -19,8 +21,14 @@ public class Facturas {
     @Column(name = "Fecha")
     private Date fecha;
 
+    @Column(name = "TipodePago")
+    private String tipoDePago;
+
     @Column(name = "DocumentoCliente")
     private String documentoCliente;
+
+    @Column(name = "NombreCliente")
+    private String nombreCliente;
 
     @Column(name = "Subtotal")
     private float subtotal;
@@ -40,19 +48,21 @@ public class Facturas {
     @Column(name= "Total")
     private float total;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "facturas")
+    @JsonManagedReference
+    @OneToMany(mappedBy = "facturas",cascade = CascadeType.ALL)
     private List<Detalles> detallesList;
 
     public Facturas(){
 
     }
 
-    public Facturas(Long id, String numeroFactura, Date fecha, String documentoCliente, float subtotal, float descuento, float iva, float totalDescuento, float totalImpuesto, float total, List<Detalles> detallesList) {
-        this.id = id;
+    public Facturas(String numeroFactura, Date fecha, String tipoDePago, String documentoCliente, String nombreCliente, float subtotal, float descuento, float iva, float totalDescuento, float totalImpuesto, float total, List<Detalles> detallesList) {
+
         this.numeroFactura = numeroFactura;
         this.fecha = fecha;
+        this.tipoDePago = tipoDePago;
         this.documentoCliente = documentoCliente;
+        this.nombreCliente = nombreCliente;
         this.subtotal = subtotal;
         this.descuento = descuento;
         this.iva = iva;
@@ -64,10 +74,6 @@ public class Facturas {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getNumeroFactura() {
@@ -86,12 +92,28 @@ public class Facturas {
         this.fecha = fecha;
     }
 
+    public String getTipoDePago() {
+        return tipoDePago;
+    }
+
+    public void setTipoDePago(String tipoDePago) {
+        this.tipoDePago = tipoDePago;
+    }
+
     public String getDocumentoCliente() {
         return documentoCliente;
     }
 
     public void setDocumentoCliente(String documentoCliente) {
         this.documentoCliente = documentoCliente;
+    }
+
+    public String getNombreCliente() {
+        return nombreCliente;
+    }
+
+    public void setNombreCliente(String nombreCliente) {
+        this.nombreCliente = nombreCliente;
     }
 
     public float getSubtotal() {

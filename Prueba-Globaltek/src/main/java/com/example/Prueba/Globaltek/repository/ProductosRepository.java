@@ -1,7 +1,6 @@
-package com.example.Prueba.Globaltek.Repository;
+package com.example.Prueba.Globaltek.repository;
 
-import com.example.Prueba.Globaltek.Models.Facturas;
-import com.example.Prueba.Globaltek.Models.Productos;
+import com.example.Prueba.Globaltek.models.Productos;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

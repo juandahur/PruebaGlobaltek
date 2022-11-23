@@ -1,6 +1,7 @@
-package com.example.Prueba.Globaltek.Models;
+package com.example.Prueba.Globaltek.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.List;
@@ -9,12 +10,13 @@ import java.util.List;
 @Table(name = "productos")
 public class Productos {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "Producto")
     private String producto;
 
-    @JsonIgnore
+    @JsonManagedReference
     @OneToMany(mappedBy = "productos")
     private List<Detalles> detallesList;
 
@@ -22,18 +24,14 @@ public class Productos {
 
     }
 
-    public Productos(Long id, String producto, List<Detalles> detallesList) {
+    public Productos(Long id) {
+
         this.id = id;
-        this.producto = producto;
-        this.detallesList = detallesList;
+
     }
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getProducto() {
